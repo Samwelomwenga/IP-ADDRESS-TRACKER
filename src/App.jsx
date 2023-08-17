@@ -10,6 +10,8 @@ function App() {
       padding: 0;
     }
   `
+const baseUrl=import.meta.env.BASE_API_URL;
+
   return (
     <>
     <GlobalStyle/>
