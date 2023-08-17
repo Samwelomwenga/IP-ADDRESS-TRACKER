@@ -1,3 +1,4 @@
+import PropsTypes from "prop-types";
 import {
   StyledDetaile,
   StyledContainerSection,
@@ -5,30 +6,38 @@ import {
   StyledH6,
   StyledSpan,
 } from "./styled/IPAddressDetailes.Styled";
-const IPAddressDetailes = () => {
+const IPAddressDetailes = ({geoLocation}) => {
+  const {ip,location:{country,region,postalCode,timezone},isp}=geoLocation;
   return (
     <StyledContainerSection>
       <StyledSection>
         <StyledH6> IP ADDRESS</StyledH6>
-        <StyledDetaile>192.212.174.101</StyledDetaile>
+        <StyledDetaile>{ip}</StyledDetaile>
       </StyledSection>
 
       <section>
         <StyledH6>LOCATION</StyledH6>
         <StyledDetaile>
-          Brooklyn,<StyledSpan>NY 1001</StyledSpan>
+          {region}{", "}{country}<StyledSpan>{postalCode}</StyledSpan>
         </StyledDetaile>
       </section>
       <section>
-        <StyledH6> TIMEZONE</StyledH6>
-        <StyledDetaile>UTC-0500</StyledDetaile>
+        <StyledH6>TIMEZONE</StyledH6>
+        <StyledDetaile>{timezone}</StyledDetaile>
       </section>
       <section>
         <StyledH6>ISP</StyledH6>
-        <StyledDetaile>SAFARICOM</StyledDetaile>
+        <StyledDetaile>{isp}</StyledDetaile>
       </section>
     </StyledContainerSection>
   );
 };
+
+IPAddressDetailes.propTypes = {
+  geoLocation: PropsTypes.object.isRequired,
+};
+
+
+
 
 export default IPAddressDetailes;
