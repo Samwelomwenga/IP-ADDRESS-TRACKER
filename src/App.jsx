@@ -28,7 +28,6 @@ function App() {
     };
     getGeoLocation();
   }, []);
-
   return (
     <>
       <GlobalStyle />
@@ -36,7 +35,7 @@ function App() {
         <h1>IP ADDRESS TRACKER</h1>
         <Search />
         {geoLocation && <IPAddressDetailes geoLocation={geoLocation} />}
-        {geoLocation && <Map geoLocation={geoLocation} />}
+        {geoLocation&& <Map geoLocation={geoLocation} />}
       </StyledMain>
     </>
   );

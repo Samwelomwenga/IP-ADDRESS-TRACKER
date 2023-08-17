@@ -2,7 +2,10 @@ import PropsTypes from 'prop-types'
 import { TileLayer,Marker,Popup } from "react-leaflet";
 import { StyledMapContainer } from "./styled/StyledMapContainer";
 const Map = ({geoLocation}) => {
-    const {location}=geoLocation;
+   
+const{location:{lat,lng}}=geoLocation; 
+const location=[lat,lng];
+
   return (
     <StyledMapContainer center={location} zoom={6}>
   <TileLayer
@@ -18,7 +21,6 @@ const Map = ({geoLocation}) => {
 }
 
 Map.propTypes = {
-    geoLocation: PropsTypes.object.isRequired,
+    geoLocation:PropsTypes.object.isRequired
 }
-
 export default Map
