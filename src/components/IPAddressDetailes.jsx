@@ -24,7 +24,7 @@ const IPAddressDetailes = ({geoLocation,loading}) => {
       </section>
       <section>
         <StyledH6>TIMEZONE</StyledH6>
-        <StyledDetaile>{timezone}</StyledDetaile>
+        <StyledDetaile>UTC {timezone}</StyledDetaile>
       </section>
       <section>
         <StyledH6>ISP</StyledH6>
