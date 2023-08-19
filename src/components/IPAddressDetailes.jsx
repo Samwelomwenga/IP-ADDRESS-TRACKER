@@ -6,9 +6,10 @@ import {
   StyledH6,
   StyledSpan,
 } from "./styled/IPAddressDetailes.Styled";
-const IPAddressDetailes = ({geoLocation}) => {
+const IPAddressDetailes = ({geoLocation,loading}) => {
   const {ip,location:{country,region,postalCode,timezone},isp}=geoLocation;
   return (
+    loading && <h1>Loading...</h1>,
     <StyledContainerSection>
       <StyledSection>
         <StyledH6> IP ADDRESS</StyledH6>
@@ -35,6 +36,7 @@ const IPAddressDetailes = ({geoLocation}) => {
 
 IPAddressDetailes.propTypes = {
   geoLocation: PropsTypes.object.isRequired,
+  loading: PropsTypes.bool.isRequired,
 };
 
 

@@ -14,19 +14,27 @@ function App() {
     }
   `;
   const [geoLocation, setGeoLocation] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const source = axios.CancelToken.source;
     const getGeoLocation = async () => {
       try {
         const baseUrl = import.meta.env.VITE_BASE_API_URL;
-
-        const res = await axios.get(baseUrl);
+        const res = await axios.get(baseUrl, { cancelToken: source.token });
         setGeoLocation(res.data);
+        setLoading(false);
       } catch (error) {
+        if (axios.isCancel(error)) {
+          return;
+        }
         console.log(error);
       }
     };
     getGeoLocation();
+    return () => {
+      source.cancel;
+    };
   }, []);
   return (
     <>
@@ -34,8 +42,10 @@ function App() {
       <StyledMain>
         <h1>IP ADDRESS TRACKER</h1>
         <Search />
-        {geoLocation && <IPAddressDetailes geoLocation={geoLocation} />}
-        {geoLocation&& <Map geoLocation={geoLocation} />}
+        {geoLocation && (
+          <IPAddressDetailes geoLocation={geoLocation} loading={loading} />
+        )}
+        {geoLocation && <Map geoLocation={geoLocation} />}
       </StyledMain>
     </>
   );
