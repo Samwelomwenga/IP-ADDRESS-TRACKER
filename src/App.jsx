@@ -5,6 +5,7 @@ import Search from "./components/Search";
 import IPAddressDetailes from "./components/IPAddressDetailes";
 import { StyledMain } from "./components/styled/Main.Styled";
 import Map from "./components/Map";
+import fetchGeoIPData from "./util/FetchGeoLocation";
 function App() {
   const GlobalStyle = createGlobalStyle`
     *{
@@ -15,6 +16,20 @@ function App() {
   `;
   const [geoLocation, setGeoLocation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleFetchSearch = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const data = await fetchGeoIPData(searchInput || null);
+      setGeoLocation(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const source = axios.CancelToken.source;
@@ -41,7 +56,11 @@ function App() {
       <GlobalStyle />
       <StyledMain>
         <h1>IP ADDRESS TRACKER</h1>
-        <Search />
+        <Search
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          handleFetchSearch={handleFetchSearch}
+        />
         {geoLocation && (
           <IPAddressDetailes geoLocation={geoLocation} loading={loading} />
         )}
