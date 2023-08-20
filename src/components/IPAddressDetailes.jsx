@@ -8,7 +8,6 @@ import {
 } from "./styled/IPAddressDetailes.Styled";
 const IPAddressDetailes = ({geoLocation,loading}) => {
   const {as:{asn},ip,location:{country,city,timezone},isp}=geoLocation;
-  console.log(geoLocation)
   return (
     loading && <h1>Loading...</h1>,
     <StyledContainerSection>

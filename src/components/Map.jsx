@@ -5,7 +5,6 @@ import "leaflet/dist/leaflet.css";
 import { StyledMapContainer } from "./styled/StyledMapContainer";
 const Map = ({geoLocation}) => {
   const{location:{lat,lng,region}}=geoLocation; 
-  console.log(lat,lng,region)
   const location=[lat, lng];
 
   const markerIcon= new L.Icon(

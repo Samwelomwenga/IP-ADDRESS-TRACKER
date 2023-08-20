@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { createGlobalStyle } from "styled-components";
 import Search from "./components/Search";
 import IPAddressDetailes from "./components/IPAddressDetailes";
@@ -32,23 +31,20 @@ function App() {
   };
 
   useEffect(() => {
-    const source = axios.CancelToken.source;
+    let ignore = false;
     const getGeoLocation = async () => {
       try {
-        const baseUrl = import.meta.env.VITE_BASE_API_URL;
-        const res = await axios.get(baseUrl, { cancelToken: source.token });
-        setGeoLocation(res.data);
-        setLoading(false);
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          return;
+const data= await fetchGeoIPData();
+        if (!ignore) {setGeoLocation(data);
+          console.log(data);
         }
-        console.log(error);
+      } catch (error) {
+        ignore&&console.log(error);
       }
     };
     getGeoLocation();
     return () => {
-      source.cancel;
+ignore=true;
     };
   }, []);
   return (
