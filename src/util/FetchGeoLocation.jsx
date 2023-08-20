@@ -9,7 +9,6 @@ const fetchGeoIPData = async(param) => {
 
         if (param) {
             queryParams[param.startsWith("http")?"domain":"ipAddress"]=param;
-            console.log(queryParams)
         }
         const response= await axios.get(baseUrl,{
             params:queryParams,

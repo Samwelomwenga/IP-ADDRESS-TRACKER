@@ -7,7 +7,8 @@ import {
   StyledSpan,
 } from "./styled/IPAddressDetailes.Styled";
 const IPAddressDetailes = ({geoLocation,loading}) => {
-  const {ip,location:{country,region,postalCode,timezone},isp}=geoLocation;
+  const {as:{asn},ip,location:{country,city,timezone},isp}=geoLocation;
+  console.log(geoLocation)
   return (
     loading && <h1>Loading...</h1>,
     <StyledContainerSection>
@@ -19,16 +20,16 @@ const IPAddressDetailes = ({geoLocation,loading}) => {
       <section>
         <StyledH6>LOCATION</StyledH6>
         <StyledDetaile>
-          {region}{", "}{country}<StyledSpan>{postalCode}</StyledSpan>
+          {city?city:"_"}{", "}{country?country:"_"}{' '}<StyledSpan>{ asn? asn:"_"}</StyledSpan>
         </StyledDetaile>
       </section>
       <section>
         <StyledH6>TIMEZONE</StyledH6>
-        <StyledDetaile>UTC {timezone}</StyledDetaile>
+        <StyledDetaile>UTC {timezone?timezone:"_"}</StyledDetaile>
       </section>
       <section>
         <StyledH6>ISP</StyledH6>
-        <StyledDetaile>{isp}</StyledDetaile>
+        <StyledDetaile>{isp?isp:"_"}</StyledDetaile>
       </section>
     </StyledContainerSection>
   );

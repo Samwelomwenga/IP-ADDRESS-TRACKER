@@ -17,7 +17,7 @@ const Map = ({geoLocation}) => {
 
   return (
   
-    <StyledMapContainer center={location} zoom={80}>
+    <StyledMapContainer key={lat} center={location} zoom={20}>
   <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
