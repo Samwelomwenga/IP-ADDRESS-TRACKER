@@ -9,7 +9,7 @@ const Map = ({geoLocation}) => {
 
   const markerIcon= new L.Icon(
     {
-      iconUrl:"../assets/images/icon-location.svg",
+      iconUrl:"src/assets/images/icon-location.svg",
       iconSize:[35,45],
     }
   )
